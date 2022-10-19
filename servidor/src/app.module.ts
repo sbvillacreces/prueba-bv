@@ -4,11 +4,13 @@ import { AppService } from './app.service';
 import { IngredienteController } from './ingrediente/ingrediente.controller';
 import { IngredienteModule } from './ingrediente/ingrediente.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { MedicineModule } from './medicine/medicine.module';
 
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost/database',{useNewUrlParser:true}),
-    IngredienteModule
+    IngredienteModule,
+    MedicineModule
 ],
   controllers: [AppController, IngredienteController],
   providers: [AppService],

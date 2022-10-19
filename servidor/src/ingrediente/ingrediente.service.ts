@@ -23,10 +23,10 @@ export class IngredienteService {
     //this function will return the created ingredient
     async createIngrediente(createIngredienteDTO: CreateIngredienteDTO): Promise<Ingrediente> {
         const ingrediente = new this.ingredienteModel(createIngredienteDTO);
-        return ingrediente.save();
+        return await ingrediente.save();
     }
 
-//this function will return the responde if a ingredient has been deleted
+//this function will return the response if a ingredient has been deleted
     async deleteIngrediente(ingredienteId: string): Promise<Ingrediente> {
         const delIngrediente = await this.ingredienteModel.findByIdAndDelete(ingredienteId);
         return delIngrediente;
