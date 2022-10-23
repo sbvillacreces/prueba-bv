@@ -1,0 +1,32 @@
+<div class="h4 pb-2 mb-1 text-danger border-bottom border-danger">
+    List of Ingredients
+</div>
+<span class="d-grid d-md-flex justify-content-md-end">
+    <button class="btn btn-success mb-1 mt-1" [routerLink]="['/ingrediente/createIngrediente']"> 
+        <mat-icon aria-hidden="false" fontIcon="add"></mat-icon>Add Ingrediente</button>
+</span>
+<div *ngIf="numberItems<=0" class="card">
+    <div class="card text-center">
+        <br><br>
+        <span style="align-content: center;color: chocolate;transform: scale(3);">
+            <mat-icon aria-hidden="false" fontIcon="report_problem"></mat-icon>
+        </span>
+        <div class="card-body">
+            <h5 class="card-title">There are no Ingredientes</h5>
+            <button class="btn btn-success mb-1 mt-1" [routerLink]="['/ingrediente/createIngrediente']">
+                <span class="glyphicon glyphicon-plus-sign"></span>Add Ingrediente</button>
+        </div>
+    </div>
+</div>
+<div *ngIf="numberItems>0">
+    <div *ngFor="let ingrediente of ingredientes" class="card">
+        <div class="card-title shadow p-3 mb-2 bg-body rounded">
+            <strong>{{ingrediente.name}}</strong>
+            <span class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button [routerLink]="['/ingrediente/updateIngrediente',ingrediente._id]"
+                    class="btn btn-warning m-1">Edit</button>
+                <button (click)="deletedButtonClicked(ingrediente._id || '')" class="btn btn-danger m-1">Delete</button>
+            </span>
+        </div>
+    </div>
+</div>

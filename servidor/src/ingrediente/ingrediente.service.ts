@@ -27,7 +27,7 @@ export class IngredienteService {
     }
 
 //this function will return the response if a ingredient has been deleted
-    async deleteIngrediente(ingredienteId: string): Promise<Ingrediente> {
+    async deleteIngrediente(ingredienteId: string): Promise<any> {
         const delIngrediente = await this.ingredienteModel.findByIdAndDelete(ingredienteId);
         return delIngrediente;
     }

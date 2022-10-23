@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-sm-4 offset-md-4">
+<div class="card card-body" *ngIf="ingredienteForm">
+<form (submit)="updateIngrediente(ingredienteForm.value)" [formGroup]="ingredienteForm">
+<div class="form-group">
+    <input type="hidden" name="idIngrediente" formControlName="idIngrediente">
+    <input type="text" name="ingredienteName" class="form-control" formControlName="ingredienteName"
+    placeholder="Ingrediente Name" autofocus>
+    <div class="alert-danger" *ngIf="ingredienteForm.get('ingredienteName')?.touched && 
+                        ingredienteForm.get('ingredienteName')?.errors?.['required']">
+                        <div class="container-error-message m-1">
+                            Name is required
+                        </div>
+                    </div>
+                    <div class="alert-danger" *ngIf="ingredienteForm.get('ingredienteName')?.touched && 
+                        ingredienteForm.get('ingredienteName')?.errors?.['minlength']">
+                        <div class="container-error-message m-1">
+                            Name must be at least {{ingredienteForm.get('ingredienteName')?.errors?.['minlength'].requiredLength}} characters long
+                        </div>
+                    </div>
+    <hr>
+    <button class="btn btn-success btn-block" [disabled]="ingredienteForm.invalid">Update</button>
+</div>
+</form>
+</div>
+    </div>
+</div>

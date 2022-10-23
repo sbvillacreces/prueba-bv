@@ -20,9 +20,9 @@ export class MedicineController {
     @Get('/medicines')
     async getmedicines(@Res() res) {
         const medicines = await this.medicineService.getMedicines();
-        return res.status(HttpStatus.OK).json({
+        return res.status(HttpStatus.OK).json(
             medicines,
-        });
+        );
 
     }
 

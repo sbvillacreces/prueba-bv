@@ -4,7 +4,7 @@ import { CreateIngredienteDTO } from "src/ingrediente/dto/ingrediente.dto";
 
 export interface Medicine extends Document{
     name:String;
-    posology: number;
+    posology: String;
     ingredients: Array<CreateIngredienteDTO>;
     expirationDate:Date;
 }

@@ -10,7 +10,7 @@ export class IngredienteController {
 
     @Post('/createIngrediente')
 
-    async createPost(@Res() res, @Body() createIngredienteDTO: CreateIngredienteDTO) {
+    async createIngrediente(@Res() res, @Body() createIngredienteDTO: CreateIngredienteDTO) {
         const ingrediente = await this.ingredienteService.createIngrediente(createIngredienteDTO);
         return res.status(HttpStatus.OK).json({
             ingredient: ingrediente,
@@ -21,19 +21,19 @@ export class IngredienteController {
     @Get('/ingredientes')
     async getIngredientes(@Res() res) {
         const ingredientes = await this.ingredienteService.getIngredientes();
-        return res.status(HttpStatus.OK).json({
+        return res.status(HttpStatus.OK).json(
            ingredientes,
-        });
+        );
 
     }
 
-    @Get('/:ingredienteId')
+    @Get('getIngrediente/:ingredienteId')
     async getIngrediente(@Res() res,@Param('ingredienteId') ingredienteId) {
         const ingrediente = await this.ingredienteService.getIngrediente(ingredienteId);
         if(!ingrediente) {throw new NotFoundException('no ingredient');}
-        return res.status(HttpStatus.OK).json({
+        return res.status(HttpStatus.OK).json(
            ingrediente,
-        });
+        );
     }
 
     @Delete('/deleteIngrediente')

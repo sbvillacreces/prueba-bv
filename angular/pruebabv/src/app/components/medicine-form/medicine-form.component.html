@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-sm-4 offset-md-4">
+        <div *ngIf="medicineForm" class="card card-body">
+            <form (submit)="submitMedicine(medicineForm.value)" [formGroup]="medicineForm">
+                <div class="form-group control">
+                    <input type="text" name="medicineName" class="form-control" formControlName="medicineName"
+                        placeholder="Medicine Name" autofocus>
+                    <div class="alert-danger" *ngIf="medicineForm.get('medicineName')?.touched && 
+                        medicineForm.get('medicineName')?.errors?.['required']">
+                        <div class="container-error-message m-1">
+                            Name is required
+                        </div>
+                    </div>
+                    <div class="alert-danger" *ngIf="medicineForm.get('medicineName')?.touched && 
+                    medicineForm.get('medicineName')?.errors?.['minlength']">
+                        <div class="container-error-message m-1">
+                            Name must be at least {{medicineForm.get('medicineName')?.errors?.['minlength'].requiredLength}} characters long
+                        </div>
+                    </div>
+                    <br>
+                    <input type="text" name="posology" class="form-control" formControlName="posology"
+                        placeholder="Medicine Posology" autofocus>
+                    <div class="alert-danger" *ngIf="medicineForm.get('posology')?.touched && 
+                        medicineForm.get('posology')?.errors?.['required']">
+                        <div class="container-error-message m-1">
+                            Posology is required
+                        </div>
+                    </div>
+                    <div class="alert-danger" *ngIf="medicineForm.get('posology')?.touched && 
+                    medicineForm.get('posology')?.errors?.['minlength']">
+                        <div class="container-error-message m-1">
+                            Posology must be at least {{medicineForm.get('posology')?.errors?.['minlength'].requiredLength}} characters long
+                        </div>
+                    </div>
+                    <br>
+                    <input type="date" name="expirationDate" class="form-control" formControlName="expirationDate"
+                        placeholder="Medicine Expiration Date" autofocus>
+                    <div class="alert-danger" *ngIf="medicineForm.get('expirationDate')?.touched && 
+                        medicineForm.get('expirationDate')?.errors?.['required']">
+                        <div class="container-error-message m-1">
+                            Expiration Date is required
+                        </div>
+                    </div>
+                    
+                    <div *ngIf="numberItems>0">
+                        <select name="" id="" formControlName="ingredientesD" multiple>
+                            <option *ngFor="let ingrediente of ingredientes" value={{ingrediente._id}}>{{ingrediente.name}}</option>
+                        </select>
+                    </div>
+                    <div *ngIf="numberItems<=0">
+                        There are no ingredientes to add to this medicine
+                    </div>
+                    <hr>
+                    <button class="btn btn-success btn-block" >Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
