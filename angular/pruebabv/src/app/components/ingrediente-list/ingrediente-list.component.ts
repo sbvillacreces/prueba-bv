@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IngredienteService } from 'src/app/services/ingrediente.service';
 import { Ingrediente } from 'src/app/interfaces/ingrediente';
-import  Swal from'sweetalert2';
-
+import Swal from 'sweetalert2';
+import { PageEvent } from '@angular/material/paginator'
 @Component({
   selector: 'app-ingrediente-list',
   templateUrl: './ingrediente-list.component.html',
@@ -13,8 +13,13 @@ export class IngredienteListComponent implements OnInit {
   constructor(private ingredienteService: IngredienteService) { }
 
   ingredientes: Ingrediente[] = [];
-  numberItems:number=0;
- 
+  numberItems: number = 0;
+
+  //pagination
+  page_size: number = 5;
+  page_number: number = 1;
+  pageSizeOptions = [3,5, 10, 20, 30];
+
   ngOnInit(): void {
     this.getIngredientes();
   }
@@ -24,27 +29,26 @@ export class IngredienteListComponent implements OnInit {
       .subscribe(
         res => {
           this.ingredientes = res;
-          this.numberItems=res.length;
-
+          this.numberItems = res.length;
         },
         err => console.log(err)
       )
   }
 
-  deletedButtonClicked(id: string){
+  deletedButtonClicked(id: string) {
     Swal.fire({
       title: 'Are you sure you want to delete this ingredient?',
       showDenyButton: true,
       showCancelButton: false,
-      showConfirmButton:true,
+      showConfirmButton: true,
       denyButtonText: 'Delete',
-      confirmButtonText:'Cancel'
+      confirmButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire('Ingredient not deleted', '', 'info')
       } else if (result.isDenied) {
         Swal.fire('Ingredient deleted!', '', 'success'),
-        this.deleteIngrediente(id)
+          this.deleteIngrediente(id)
       }
     })
   }
@@ -53,10 +57,18 @@ export class IngredienteListComponent implements OnInit {
     this.ingredienteService.deleteIngrediente(id)
       .subscribe(
         res => {
-          this.getIngredientes() 
+          this.getIngredientes()
         },
-        err => {console.log(err),
-        Swal.fire('Ingredient can not be deleted', '', 'error')}
+        err => {
+          console.log(err),
+          Swal.fire('Ingredient can not be deleted', '', 'error')
+        }
       )
   }
+
+  handlePage(e: PageEvent) {
+    this.page_size = e.pageSize;
+    this.page_number = e.pageIndex + 1;
+  }
+
 }

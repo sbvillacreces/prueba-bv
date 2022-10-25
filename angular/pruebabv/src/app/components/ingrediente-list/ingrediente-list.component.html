@@ -18,15 +18,24 @@
         </div>
     </div>
 </div>
+
 <div *ngIf="numberItems>0">
-    <div *ngFor="let ingrediente of ingredientes" class="card">
+    <div *ngFor="let ingrediente of ingredientes | paginate:page_size:page_number" class="card">
         <div class="card-title shadow p-3 mb-2 bg-body rounded">
             <strong>{{ingrediente.name}}</strong>
             <span class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button [routerLink]="['/ingrediente/updateIngrediente',ingrediente._id]"
-                    class="btn btn-warning m-1">Edit</button>
-                <button (click)="deletedButtonClicked(ingrediente._id || '')" class="btn btn-danger m-1">Delete</button>
+                    class="btn btn-warning m-1"><mat-icon aria-hidden="false" fontIcon="create"></mat-icon>Edit</button>
+                <button (click)="deletedButtonClicked(ingrediente._id || '')" class="btn btn-danger m-1">
+                    <mat-icon aria-hidden="false" fontIcon="delete"></mat-icon>
+                    Delete</button>
             </span>
         </div>
     </div>
 </div>
+<mat-paginator [length]="numberItems"
+               [pageSize]="page_size"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="handlePage($event)"
+               aria-label="Select page">
+</mat-paginator>

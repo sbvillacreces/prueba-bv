@@ -6,12 +6,13 @@ import { IngredienteUpdateComponent } from './components/ingrediente-update/ingr
 import { MedicineFormComponent } from './components/medicine-form/medicine-form.component';
 import { MedicineListComponent } from './components/medicine-list/medicine-list.component';
 import { MedicineUpdateComponent } from './components/medicine-update/medicine-update.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 //definition of routes that we will be using in the app
 const routes: Routes = [
   {
     path:'',
-    component:IngredienteListComponent
+    component:HomePageComponent
   },
   {
     path:'ingrediente/ingredientes',

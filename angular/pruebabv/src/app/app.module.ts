@@ -13,7 +13,10 @@ import { MedicineFormComponent } from './components/medicine-form/medicine-form.
 import { MedicineUpdateComponent } from './components/medicine-update/medicine-update.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
-
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { PaginatePipe } from './pipes/paginate.pipe';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,8 @@ import {MatSelectModule} from '@angular/material/select';
     MedicineListComponent,
     MedicineFormComponent,
     MedicineUpdateComponent,
+    HomePageComponent,
+    PaginatePipe,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,9 @@ import {MatSelectModule} from '@angular/material/select';
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
-    MatSelectModule
+    MatSelectModule,
+    MatPaginatorModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

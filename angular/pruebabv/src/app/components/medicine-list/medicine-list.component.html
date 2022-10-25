@@ -23,8 +23,8 @@
             <strong>{{medicine.name}}</strong>
             <span class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button [routerLink]="['/medicine/updateMedicine',medicine._id]"
-                    class="btn btn-warning m-1">Edit</button>
-                <button (click)="deletedButtonClicked(medicine._id || '')" class="btn btn-danger m-1">Delete</button>
+                    class="btn btn-warning m-1"><mat-icon aria-hidden="false" fontIcon="create"></mat-icon>Edit</button>
+                <button (click)="deletedButtonClicked(medicine._id || '')" class="btn btn-danger m-1"><mat-icon aria-hidden="false" fontIcon="delete"></mat-icon>Delete</button>
             </span>
         </div>
     </div>

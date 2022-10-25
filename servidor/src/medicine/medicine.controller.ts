@@ -26,13 +26,13 @@ export class MedicineController {
 
     }
 
-    @Get('/:medicineId')
+    @Get('getMedicine/:medicineId')
     async getMedicine(@Res() res,@Param('medicineId') medicineId) {
         const medicine = await this.medicineService.getMedicine(medicineId);
         if(!medicine) {throw new NotFoundException('no medicine');}
-        return res.status(HttpStatus.OK).json({
+        return res.status(HttpStatus.OK).json(
             medicine,
-        });
+        );
     }
  
     @Delete('/deleteMedicine')

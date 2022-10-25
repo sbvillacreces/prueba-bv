@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-4 offset-md-4">
         <div class="card card-body">
-            <form (submit)="submitIngrediente()" [formGroup]="ingredienteForm">
+            <form (submit)="submitIngrediente(ingredienteForm.value)" [formGroup]="ingredienteForm">
                 <div class="form-group control">
                     <input type="text" name="ingredienteName" class="form-control" formControlName="ingredienteName"
                         placeholder="Ingrediente Name" autofocus>

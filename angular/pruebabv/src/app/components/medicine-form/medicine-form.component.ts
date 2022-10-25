@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { FormControl, FormBuilder, Validators, FormGroup, AbstractControl } from '@angular/forms';
 import { Medicine } from 'src/app/interfaces/medicine';
@@ -27,6 +27,7 @@ export class MedicineFormComponent implements OnInit {
     private medicineService: MedicineService,
     private router: Router,
     private formBuilder: FormBuilder,
+    private activatedRoute: ActivatedRoute,
     private ingredienteService:IngredienteService
   ) { }
 
@@ -35,6 +36,7 @@ export class MedicineFormComponent implements OnInit {
   }
 
   getIngredientes() {
+    const params = this.activatedRoute.snapshot.params;
     this.ingredienteService.getIngredientes()
       .subscribe(
         res => {

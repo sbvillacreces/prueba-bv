@@ -42,6 +42,8 @@ export class IngredienteUpdateComponent implements OnInit {
           res => {
             this.ingrediente = res;
             console.log(this.ingrediente)
+            console.log(res);
+            
             //this.ingredienteForm = this.buildForm(res);
             this.ingredienteForm = this.formBuilder.group({
                ingredienteName: new FormControl(this.ingrediente.name, [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/), Validators.minLength(4)]),
@@ -51,13 +53,6 @@ export class IngredienteUpdateComponent implements OnInit {
           err => console.log(err)
         )
     }
-  }
-
-  private buildForm(ingrediente: Ingrediente): FormGroup {
-    return this.formBuilder.group({
-      ingredienteName: [ingrediente.name, [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/), Validators.minLength(4)]],
-      idIngrediente: [ingrediente._id]
-    })
   }
 
   updateIngrediente(values: any) {

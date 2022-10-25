@@ -28,14 +28,16 @@ export class IngredienteFormComponent implements OnInit {
   ngOnInit() {
     this.ingredienteForm=this.buildForm();
   }
-
-  private buildForm():FormGroup { 
-     return this.formBuilder.group({
-        ingredienteName:['', [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/),Validators.minLength(4)]],
-      })
+  private buildForm() {
+    return new FormGroup({
+      ingredienteName: new FormControl('', [Validators.required, Validators.minLength(5), Validators.pattern(/^[a-zA-Z ]+$/)]),
+    });
   }
 
-  submitIngrediente() {
+
+  submitIngrediente(value:any) {
+    this.ingrediente._id=value._id;
+    this.ingrediente.name=value.ingredienteName;
       this.ingredienteService.createIngrediente(this.ingrediente).subscribe(
         res => {
           this.router.navigate(['/ingrediente/ingredientes']);

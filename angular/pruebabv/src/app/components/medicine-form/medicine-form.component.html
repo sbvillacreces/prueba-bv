@@ -41,9 +41,9 @@
                             Expiration Date is required
                         </div>
                     </div>
-                    
+                    <label class="mt-1"><strong>Ingredientes:</strong></label>
                     <div *ngIf="numberItems>0">
-                        <select name="" id="" formControlName="ingredientesD" multiple>
+                        <select formControlName="ingredientesD" class="w-100" multiple>
                             <option *ngFor="let ingrediente of ingredientes" value={{ingrediente._id}}>{{ingrediente.name}}</option>
                         </select>
                     </div>
