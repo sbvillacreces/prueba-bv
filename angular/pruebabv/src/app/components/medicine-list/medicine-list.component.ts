@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MedicineService } from 'src/app/services/medicine.service';
 import { Medicine } from 'src/app/interfaces/medicine';
 import  Swal from'sweetalert2';
+import { PageEvent } from '@angular/material/paginator'
 
 @Component({
   selector: 'app-medicine-list',
@@ -14,6 +15,10 @@ export class MedicineListComponent implements OnInit {
 
   medicines:Medicine[]=[];
   numberItems:number=0;
+  //pagination
+  page_size: number = 5;
+  page_number: number = 1;
+  pageSizeOptions = [3,5, 10, 20, 30];
 
   ngOnInit(): void {
     this.getMedicines();
@@ -58,6 +63,11 @@ export class MedicineListComponent implements OnInit {
         err => {console.log(err),
         Swal.fire('Medicine can not be deleted', '', 'error')}
       )
+  }
+
+  handlePage(e: PageEvent) {
+    this.page_size = e.pageSize;
+    this.page_number = e.pageIndex + 1;
   }
 
 }

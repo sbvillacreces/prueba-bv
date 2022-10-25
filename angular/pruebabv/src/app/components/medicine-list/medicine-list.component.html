@@ -18,7 +18,7 @@
     </div>
 </div>
 <div *ngIf="medicines">
-    <div *ngFor="let medicine of medicines" class="card">
+    <div *ngFor="let medicine of medicines| paginate:page_size:page_number" class="card">
         <div class="card-title shadow p-3 mb-2 bg-body rounded">
             <strong>{{medicine.name}}</strong>
             <span class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -29,3 +29,9 @@
         </div>
     </div>
 </div>
+<mat-paginator [length]="numberItems"
+               [pageSize]="page_size"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="handlePage($event)"
+               aria-label="Select page">
+</mat-paginator>
