@@ -1,5 +1,4 @@
-import { Ingrediente } from "./ingrediente";
-
+//interface of medicine
 export interface Medicine {
     _id?: string;
     name: string;

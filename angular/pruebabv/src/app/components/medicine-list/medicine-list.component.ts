@@ -14,7 +14,7 @@ import { IngredienteService } from 'src/app/services/ingrediente.service';
 export class MedicineListComponent implements OnInit {
 
   constructor(private medicineService: MedicineService, private ingredienteService: IngredienteService) { }
-
+//variables
   medicines: Medicine[] = [];
   medicineFiltered: Medicine[] = [];
   numberItems: number = 0;
@@ -30,7 +30,7 @@ export class MedicineListComponent implements OnInit {
     this.getMedicines();
     this.getIngredientes();
   }
-
+//getting all the medicines
   getMedicines() {
     this.medicineService.getMedicines()
       .subscribe(
@@ -41,6 +41,7 @@ export class MedicineListComponent implements OnInit {
         err => console.log(err)
       )
   }
+  //getting all the ingredients
   getIngredientes() {
 
     this.ingredienteService.getIngredientes()
@@ -51,6 +52,7 @@ export class MedicineListComponent implements OnInit {
         err => console.log(err)
       )
   }
+  //warning if the delete button has been clicked, so the systema can confirm the decision
   deletedButtonClicked(id: string) {
     Swal.fire({
       title: 'Are you sure you want to delete this medicine?',
@@ -68,7 +70,7 @@ export class MedicineListComponent implements OnInit {
       }
     })
   }
-
+//if the action is confirmed so the system proceed to delete it
   deleteMedicine(id: string) {
     this.medicineService.deleteMedicine(id)
       .subscribe(
@@ -103,7 +105,7 @@ export class MedicineListComponent implements OnInit {
       });
     });
   }
-
+//cleaning the searching area
   clean() {
     this.search='';
     this.cleanVisible=false;

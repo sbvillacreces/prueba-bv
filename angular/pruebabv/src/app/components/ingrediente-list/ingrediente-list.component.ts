@@ -11,7 +11,7 @@ import { PageEvent } from '@angular/material/paginator'
 export class IngredienteListComponent implements OnInit {
 
   constructor(private ingredienteService: IngredienteService) { }
-
+//variables
   ingredientes: Ingrediente[] = [];
   numberItems: number = 0;
 
@@ -23,7 +23,7 @@ export class IngredienteListComponent implements OnInit {
   ngOnInit(): void {
     this.getIngredientes();
   }
-
+//getting all the ingredients
   getIngredientes() {
     this.ingredienteService.getIngredientes()
       .subscribe(
@@ -34,7 +34,7 @@ export class IngredienteListComponent implements OnInit {
         err => console.log(err)
       )
   }
-
+  //warning if the delete button has been clicked, so the systema can confirm the decision
   deletedButtonClicked(id: string) {
     Swal.fire({
       title: 'Are you sure you want to delete this ingredient?',
@@ -52,7 +52,7 @@ export class IngredienteListComponent implements OnInit {
       }
     })
   }
-
+//if the action is confirmed so the system proceed to delete it
   deleteIngrediente(id: string) {
     this.ingredienteService.deleteIngrediente(id)
       .subscribe(
@@ -65,7 +65,7 @@ export class IngredienteListComponent implements OnInit {
         }
       )
   }
-
+//pagination event
   handlePage(e: PageEvent) {
     this.page_size = e.pageSize;
     this.page_number = e.pageIndex + 1;

@@ -7,7 +7,7 @@ import { CreateIngredienteDTO } from './dto/ingrediente.dto';
 export class IngredienteController {
 
     constructor(private ingredienteService: IngredienteService) { }
-
+//routes so the system can do the differents action CRUD
     @Post('/createIngrediente')
 
     async createIngrediente(@Res() res, @Body() createIngredienteDTO: CreateIngredienteDTO) {

@@ -34,7 +34,7 @@ export class MedicineFormComponent implements OnInit {
   ngOnInit(): void {
     this.getIngredientes();
   }
-
+//getting all the ingredients
   getIngredientes() {
     const params = this.activatedRoute.snapshot.params;
     this.ingredienteService.getIngredientes()
@@ -48,7 +48,7 @@ export class MedicineFormComponent implements OnInit {
         err => console.log(err)
       )
   }
-
+//biulding the form
   private buildForm(value:Ingrediente[]) {
     return new FormGroup({
       medicineName: new FormControl('', [Validators.required, Validators.minLength(5), Validators.pattern(/^[a-zA-Z ]+$/)]),
@@ -57,7 +57,7 @@ export class MedicineFormComponent implements OnInit {
       ingredientesD: new FormControl(value, [Validators.required]),
     });
   }
-
+//saving the new medicine
   submitMedicine(value:any) {
     this.medicine._id=value._id;
     this.medicine.name=value.medicineName;

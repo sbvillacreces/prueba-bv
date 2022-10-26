@@ -10,7 +10,7 @@ export class MedicineService {
 
 constructor(@InjectModel('Medicine') private readonly medicineModel:Model<Medicine>){}
 
-//this function will return all the existing medicines 
+//this function will return all the existing medicines  
 async getMedicines(): Promise<Medicine[]> {
     const medicines = await this.medicineModel.find();
     return medicines;

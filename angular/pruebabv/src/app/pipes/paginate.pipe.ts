@@ -5,6 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PaginatePipe implements PipeTransform {
 
+  //pagination pipe so the user can decided how many items it would be presented
+
   transform(array: any[], page_size: number | string, page_number: number): any[] {
     if (!array.length) return [];
     if (page_size === 'all') {

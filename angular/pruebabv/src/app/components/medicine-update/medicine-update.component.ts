@@ -21,7 +21,7 @@ export class MedicineUpdateComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private ingredienteService:IngredienteService) { }
-
+//variables
   medicines: Medicine[] = [];
   ingredientes: Ingrediente[] = [];
   numberItems: number = 0;
@@ -37,7 +37,7 @@ export class MedicineUpdateComponent implements OnInit {
     this.getIngredientes();
     
   }
-
+//getting all the ingredients
   getIngredientes() {
     this.ingredienteService.getIngredientes()
       .subscribe(
@@ -49,7 +49,7 @@ export class MedicineUpdateComponent implements OnInit {
         err => console.log(err)
       )
   }
-
+//initialize the form
   formInit() {
     const params = this.activatedRoute.snapshot.params;
     if (params) {
@@ -69,7 +69,7 @@ export class MedicineUpdateComponent implements OnInit {
         )
     }
   }
-
+//send to the medicine service the id and the updated medicine
   updateMedicine(values: any) {
     this.medicine._id = values.idMedicine;
     this.medicine.name = values.medicineName;
@@ -89,8 +89,8 @@ export class MedicineUpdateComponent implements OnInit {
         }
       )
   }
-
-  get ingredienteName() {
+//getting the name of the medicine
+  get medicineName() {
     return this.medicineForm.get('medicineName');
   }
 

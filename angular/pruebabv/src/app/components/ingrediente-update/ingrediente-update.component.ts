@@ -33,7 +33,7 @@ export class IngredienteUpdateComponent implements OnInit {
   ngOnInit() {
     this.formInit();
   }
-
+//initialize the form and get ingredients
   formInit() {
     const params = this.activatedRoute.snapshot.params;
     if (params) {
@@ -50,7 +50,7 @@ export class IngredienteUpdateComponent implements OnInit {
         )
     }
   }
-
+//send to the ingredient service the id and the updated ingredient
   updateIngrediente(values: any) {
     this.ingrediente._id=values.idIngrediente;
     this.ingrediente.name=values.ingredienteName;
@@ -67,7 +67,7 @@ export class IngredienteUpdateComponent implements OnInit {
         }
       )
   }
-
+//getting the name of the ingredient
   get ingredienteName() {
     return this.ingredienteForm.get('ingredienteName');
   }

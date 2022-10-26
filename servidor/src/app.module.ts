@@ -8,6 +8,7 @@ import { MedicineModule } from './medicine/medicine.module';
 
 @Module({
   imports: [
+    //declaration of the connection between NestJs and MongoDB
     MongooseModule.forRoot('mongodb://localhost/database',{useNewUrlParser:true}),
     IngredienteModule,
     MedicineModule

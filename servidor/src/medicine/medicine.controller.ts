@@ -6,7 +6,7 @@ import { MedicineService } from './medicine.service';
 export class MedicineController {
 
     constructor(private medicineService: MedicineService) { }
-
+//routes so the system can do the differents action CRUD
     @Post('/createMedicine')
 
     async createPost(@Res() res, @Body() createMedicineDTO: CreateMedicineDTO) {

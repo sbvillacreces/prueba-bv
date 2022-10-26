@@ -8,7 +8,7 @@ import { MedicineListComponent } from './components/medicine-list/medicine-list.
 import { MedicineUpdateComponent } from './components/medicine-update/medicine-update.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 
-//definition of routes that we will be using in the app
+//definition of routes that we will be using in the app and their components
 const routes: Routes = [
   {
     path:'',
