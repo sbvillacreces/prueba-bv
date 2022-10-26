@@ -4,6 +4,6 @@ export interface Medicine {
     _id?: string;
     name: string;
     posology: string;
-    ingredients: Array<Ingrediente>;
+    ingredients: Array<string>;
     expirationDate:Date;
 }

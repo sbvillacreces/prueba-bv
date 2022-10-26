@@ -2,7 +2,9 @@
     List of Medicines
 </div>
 <span class="d-grid d-md-flex justify-content-md-end">
-    <button class="btn btn-success mb-1 mt-1" [routerLink]="['/medicine/createMedicine']">  <mat-icon aria-hidden="false" fontIcon="add"></mat-icon>Add Medicine</button>
+    <button class="btn btn-success mb-1 mt-1" [routerLink]="['/medicine/createMedicine']">
+        <mat-icon aria-hidden="false" fontIcon="add"></mat-icon>Add Medicine
+    </button>
 </span>
 <div *ngIf="numberItems<=0" class="card">
     <div class="card text-center">
@@ -18,20 +20,33 @@
     </div>
 </div>
 <div *ngIf="medicines">
+    <div class="input-group control" style="width:75%;margin-top: -4%;">
+        <input type="text" [(ngModel)]="search" placeholder="Search by Ingredient..." class="input-group mr-1" style="width:40%" autofocus>
+        <button class="btn btn-info mr-1" style="width:15%"  (click)="searchByIngredient(search)"> <mat-icon aria-hidden="false" fontIcon="search"></mat-icon> Search</button>
+        <span *ngIf="cleanVisible" style="width:25%">
+            <button class="btn btn-secondary" (click)="clean()"> <mat-icon aria-hidden="false" fontIcon="clear"></mat-icon> Clean</button>
+        </span>
+    </div>
+    <br>
     <div *ngFor="let medicine of medicines| paginate:page_size:page_number" class="card">
         <div class="card-title shadow p-3 mb-2 bg-body rounded">
             <strong>{{medicine.name}}</strong>
-            <span class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button [routerLink]="['/medicine/updateMedicine',medicine._id]"
-                    class="btn btn-warning m-1"><mat-icon aria-hidden="false" fontIcon="create"></mat-icon>Edit</button>
-                <button (click)="deletedButtonClicked(medicine._id || '')" class="btn btn-danger m-1"><mat-icon aria-hidden="false" fontIcon="delete"></mat-icon>Delete</button>
+            <span *ngFor="let ingrediente of medicine.ingredients">
+                <div *ngFor="let ingredienteSub of ingredientes">
+                    <li *ngIf="ingrediente==ingredienteSub._id">{{ingredienteSub.name}}</li>
+                </div>
+            </span>
+            <span class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-top: -4%;">
+                <button [routerLink]="['/medicine/updateMedicine',medicine._id]" class="btn btn-warning m-1">
+                    <mat-icon aria-hidden="false" fontIcon="create"></mat-icon>Edit
+                </button>
+                <button (click)="deletedButtonClicked(medicine._id || '')" class="btn btn-danger m-1">
+                    <mat-icon aria-hidden="false" fontIcon="delete"></mat-icon>Delete
+                </button>
             </span>
         </div>
     </div>
 </div>
-<mat-paginator [length]="numberItems"
-               [pageSize]="page_size"
-               [pageSizeOptions]="pageSizeOptions"
-               (page)="handlePage($event)"
-               aria-label="Select page">
+<mat-paginator [length]="numberItems" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions"
+    (page)="handlePage($event)" aria-label="Select page">
 </mat-paginator>

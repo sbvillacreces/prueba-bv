@@ -26,17 +26,15 @@ export class IngredienteService {
         return await ingrediente.save();
     }
 
-//this function will return the response if a ingredient has been deleted
+    //this function will return the response if a ingredient has been deleted
     async deleteIngrediente(ingredienteId: string): Promise<any> {
         const delIngrediente = await this.ingredienteModel.findByIdAndDelete(ingredienteId);
         return delIngrediente;
     }
 
     //this function will return the updated ingredient
-    async updateIngrediente(ingredienteId: string,createIngredienteDTO:CreateIngredienteDTO): Promise<Ingrediente> {
-        const updIngrediente = await this.ingredienteModel.findByIdAndUpdate(ingredienteId,createIngredienteDTO,{new:true});
+    async updateIngrediente(ingredienteId: string, createIngredienteDTO: CreateIngredienteDTO): Promise<Ingrediente> {
+        const updIngrediente = await this.ingredienteModel.findByIdAndUpdate(ingredienteId, createIngredienteDTO, { new: true });
         return updIngrediente;
     }
-
-
 }
