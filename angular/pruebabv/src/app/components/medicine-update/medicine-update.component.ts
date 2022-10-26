@@ -57,7 +57,6 @@ export class MedicineUpdateComponent implements OnInit {
         .subscribe(
           res => {
             this.medicine = res;
-            console.log(res.expirationDate.toString().substring(0,10))
             this.medicineForm = this.formBuilder.group({
               medicineName: new FormControl(res.name, [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/), Validators.minLength(4)]),
               idMedicine: new FormControl(res._id),
@@ -80,7 +79,6 @@ export class MedicineUpdateComponent implements OnInit {
     this.medicineService.updateMedicine(values.idMedicine || '', this.medicine)
       .subscribe(
         res => {
-          console.log(res);
           Swal.fire('The medicine has been updated succesfully', '', 'success');
           this.router.navigate(['/medicine/medicines'])
         },

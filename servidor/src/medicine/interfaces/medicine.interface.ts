@@ -1,5 +1,4 @@
 import { Document } from "mongoose";
-import { CreateIngredienteDTO } from "src/ingrediente/dto/ingrediente.dto";
 
 
 export interface Medicine extends Document{

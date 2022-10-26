@@ -36,7 +36,6 @@ export class MedicineListComponent implements OnInit {
       .subscribe(
         res => {
           this.medicines = res;
-          console.log(res);
           this.numberItems = res.length;
         },
         err => console.log(err)

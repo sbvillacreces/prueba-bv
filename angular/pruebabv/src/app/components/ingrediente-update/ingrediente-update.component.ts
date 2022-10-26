@@ -41,10 +41,6 @@ export class IngredienteUpdateComponent implements OnInit {
         .subscribe(
           res => {
             this.ingrediente = res;
-            console.log(this.ingrediente)
-            console.log(res);
-            
-            //this.ingredienteForm = this.buildForm(res);
             this.ingredienteForm = this.formBuilder.group({
                ingredienteName: new FormControl(this.ingrediente.name, [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/), Validators.minLength(4)]),
                idIngrediente: new FormControl(this.ingrediente._id, [Validators.required]),
@@ -61,7 +57,6 @@ export class IngredienteUpdateComponent implements OnInit {
     this.ingredienteService.updateIngrediente(values.idIngrediente || '', this.ingrediente)
       .subscribe(
         res => {
-          console.log(res);
           Swal.fire('The ingrediente has been updated succesfully', '', 'success');
           this.router.navigate(['/ingrediente/ingredientes'])
         },
