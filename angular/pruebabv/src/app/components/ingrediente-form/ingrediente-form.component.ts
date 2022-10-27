@@ -40,15 +40,16 @@ export class IngredienteFormComponent implements OnInit {
     this.ingrediente._id = value._id;
     this.ingrediente.name = value.ingredienteName;
     this.ingredienteService.createIngrediente(this.ingrediente).subscribe(
-      res => {
+      { 
+        next: res=> {
         this.router.navigate(['/ingrediente/ingredientes']);
         Swal.fire('The ingrediente has been saved succesfully', '', 'success');
       },
-      err => {
+      error:err => {
         console.log(err);
         Swal.fire('The ingrediente can not be saved', '', 'error');
-
-      }
+      }}
+      
     )
   }
 //getting the name of the ingredient

@@ -27,11 +27,13 @@ export class IngredienteListComponent implements OnInit {
   getIngredientes() {
     this.ingredienteService.getIngredientes()
       .subscribe(
-        res => {
-          this.ingredientes = res;
-          this.numberItems = res.length;
-        },
-        err => console.log(err)
+        {
+          next:res => {
+            this.ingredientes = res;
+            this.numberItems = res.length;
+          },
+          error:err => console.log(err)
+        }
       )
   }
   //warning if the delete button has been clicked, so the systema can confirm the decision
@@ -56,12 +58,14 @@ export class IngredienteListComponent implements OnInit {
   deleteIngrediente(id: string) {
     this.ingredienteService.deleteIngrediente(id)
       .subscribe(
-        res => {
-          this.getIngredientes()
-        },
-        err => {
-          console.log(err),
-          Swal.fire('Ingredient can not be deleted', '', 'error')
+        {
+          next: res => {
+            this.getIngredientes()
+          },
+          error:err => {
+            console.log(err),
+            Swal.fire('Ingredient can not be deleted', '', 'error')
+          }
         }
       )
   }

@@ -41,12 +41,14 @@ export class MedicineUpdateComponent implements OnInit {
   getIngredientes() {
     this.ingredienteService.getIngredientes()
       .subscribe(
-        res => {
-          this.ingredientes = res;
-          this.numberItems=res.length;
-          this.formInit();
-        },
-        err => console.log(err)
+        {
+          next: res => {
+            this.ingredientes = res;
+            this.numberItems=res.length;
+            this.formInit();
+          },
+          error:err => console.log(err)
+        }
       )
   }
 //initialize the form
@@ -55,17 +57,19 @@ export class MedicineUpdateComponent implements OnInit {
     if (params) {
       this.medicineService.getMedicine(params['medicineId'])
         .subscribe(
-          res => {
-            this.medicine = res;
-            this.medicineForm = this.formBuilder.group({
-              medicineName: new FormControl(res.name, [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/), Validators.minLength(4)]),
-              idMedicine: new FormControl(res._id),
-              posology: new FormControl(res.posology, [Validators.required, Validators.minLength(3)]),
-              expirationDate: new FormControl(res.expirationDate.toString().substring(0,10), [Validators.required]),
-              ingredientesD: new FormControl(res.ingredients, [Validators.required]),
-            });
-          },
-          err => console.log(err)
+          {
+            next:res => {
+              this.medicine = res;
+              this.medicineForm = this.formBuilder.group({
+                medicineName: new FormControl(res.name, [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/), Validators.minLength(4)]),
+                idMedicine: new FormControl(res._id),
+                posology: new FormControl(res.posology, [Validators.required, Validators.minLength(3)]),
+                expirationDate: new FormControl(res.expirationDate.toString().substring(0,10), [Validators.required]),
+                ingredientesD: new FormControl(res.ingredients, [Validators.required]),
+              });
+            },
+            error:err => console.log(err)
+          }
         )
     }
   }
@@ -78,14 +82,15 @@ export class MedicineUpdateComponent implements OnInit {
     this.medicine.posology=values.posology;
     this.medicineService.updateMedicine(values.idMedicine || '', this.medicine)
       .subscribe(
-        res => {
-          Swal.fire('The medicine has been updated succesfully', '', 'success');
-          this.router.navigate(['/medicine/medicines'])
-        },
-        err => {
-          console.log(err);
-
-          Swal.fire('The medicine can not be updated succesfully', '', 'error')
+        {
+          next:res => {
+            Swal.fire('The medicine has been updated succesfully', '', 'success');
+            this.router.navigate(['/medicine/medicines'])
+          },
+          error:err => {
+            console.log(err);
+            Swal.fire('The medicine can not be updated succesfully', '', 'error')
+          }
         }
       )
   }

@@ -39,13 +39,14 @@ export class MedicineFormComponent implements OnInit {
     const params = this.activatedRoute.snapshot.params;
     this.ingredienteService.getIngredientes()
       .subscribe(
-        res => {
-          this.ingredientes = res;
-          this.medicineForm = this.buildForm(res);
-          this.numberItems=res.length;
-
-        },
-        err => console.log(err)
+        {
+          next:res => {
+            this.ingredientes = res;
+            this.medicineForm = this.buildForm(res);
+            this.numberItems=res.length;
+          },
+          error: err => console.log(err)
+        }
       )
   }
 //biulding the form
@@ -65,14 +66,15 @@ export class MedicineFormComponent implements OnInit {
     this.medicine.ingredients=value.ingredientesD;
     this.medicine.posology=value.posology;
     this.medicineService.createMedicine(this.medicine).subscribe(
-      res => {
-        this.router.navigate(['/medicine/medicines']);
-        Swal.fire('The medicine has been saved succesfully', '', 'success');
-      },
-      err => {
-        console.log(err);
-        Swal.fire('The medicine can not be saved', '', 'error');
-
+      {
+        next:res => {
+          this.router.navigate(['/medicine/medicines']);
+          Swal.fire('The medicine has been saved succesfully', '', 'success');
+        },
+        error:  err => {
+          console.log(err);
+          Swal.fire('The medicine can not be saved', '', 'error');
+        }
       }
     )
   }

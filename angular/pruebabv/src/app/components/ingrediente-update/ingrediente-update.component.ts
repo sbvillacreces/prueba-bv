@@ -39,14 +39,16 @@ export class IngredienteUpdateComponent implements OnInit {
     if (params) {
       this.ingredienteService.getIngrediente(params['ingredienteId'])
         .subscribe(
-          res => {
-            this.ingrediente = res;
-            this.ingredienteForm = this.formBuilder.group({
-               ingredienteName: new FormControl(this.ingrediente.name, [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/), Validators.minLength(4)]),
-               idIngrediente: new FormControl(this.ingrediente._id, [Validators.required]),
-              });
-          },
-          err => console.log(err)
+          {
+            next:res => {
+              this.ingrediente = res;
+              this.ingredienteForm = this.formBuilder.group({
+                 ingredienteName: new FormControl(this.ingrediente.name, [Validators.required, Validators.pattern(/^[a-zA-Z ]+$/), Validators.minLength(4)]),
+                 idIngrediente: new FormControl(this.ingrediente._id, [Validators.required]),
+                });
+            },
+            error:err => console.log(err)
+          }
         )
     }
   }
@@ -56,15 +58,16 @@ export class IngredienteUpdateComponent implements OnInit {
     this.ingrediente.name=values.ingredienteName;
     this.ingredienteService.updateIngrediente(values.idIngrediente || '', this.ingrediente)
       .subscribe(
-        res => {
-          Swal.fire('The ingrediente has been updated succesfully', '', 'success');
-          this.router.navigate(['/ingrediente/ingredientes'])
-        },
-        err => {
-          console.log(err);
-
-          Swal.fire('The ingrediente can not be updated succesfully', '', 'error')
-        }
+        {
+          next: res => {
+            Swal.fire('The ingrediente has been updated succesfully', '', 'success');
+            this.router.navigate(['/ingrediente/ingredientes'])
+          },
+          error:err => {
+            console.log(err);
+            Swal.fire('The ingrediente can not be updated succesfully', '', 'error')
+          }
+        }    
       )
   }
 //getting the name of the ingredient

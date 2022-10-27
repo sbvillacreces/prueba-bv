@@ -34,11 +34,13 @@ export class MedicineListComponent implements OnInit {
   getMedicines() {
     this.medicineService.getMedicines()
       .subscribe(
-        res => {
-          this.medicines = res;
-          this.numberItems = res.length;
-        },
-        err => console.log(err)
+        {
+          next:res => {
+            this.medicines = res;
+            this.numberItems = res.length;
+          },
+          error:err => console.log(err)
+        }
       )
   }
   //getting all the ingredients
@@ -46,10 +48,12 @@ export class MedicineListComponent implements OnInit {
 
     this.ingredienteService.getIngredientes()
       .subscribe(
-        res => {
-          this.ingredientes = res;
-        },
-        err => console.log(err)
+        {
+          next: res => {
+            this.ingredientes = res;
+          },
+          error:err => console.log(err)
+        }
       )
   }
   //warning if the delete button has been clicked, so the systema can confirm the decision
@@ -74,12 +78,14 @@ export class MedicineListComponent implements OnInit {
   deleteMedicine(id: string) {
     this.medicineService.deleteMedicine(id)
       .subscribe(
-        res => {
-          this.getMedicines()
-        },
-        err => {
-          console.log(err),
-            Swal.fire('Medicine can not be deleted', '', 'error')
+        {
+          next:res => {
+            this.getMedicines()
+          },
+          error:err => {
+            console.log(err),
+              Swal.fire('Medicine can not be deleted', '', 'error')
+          }
         }
       )
   }
@@ -97,7 +103,7 @@ export class MedicineListComponent implements OnInit {
       element.ingredients.forEach(ingredienteH => {
         this.ingredientes.forEach(elementI => {
           if (elementI._id == ingredienteH) {
-            if (elementI.name.indexOf(ingredienteSearch) > -1) {
+            if (elementI.name.toLowerCase().indexOf(ingredienteSearch.toLowerCase()) > -1) {
               this.medicines.push(element);
             }
           }
